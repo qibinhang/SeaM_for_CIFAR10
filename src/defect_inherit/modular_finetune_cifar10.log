@@ -1,0 +1,262 @@
+Namespace(alpha=0.5, dropout=0.0, early_stop=30, lr_s1_output_layer=0.1, lr_s2_mask=0.05, lr_s2_output_layer=0.001, lr_s3_hidden_layer=0.005, lr_s3_output_layer=0.05, model='resnet18', momentum=0.0, n_epochs=100, prune_threshold=1.0, weight_decay=0.0001)
+step_1: /home/qibh/Documents/DNNModularityResearch/SeaM/data/defect_inheritance/seam_ft_cifar10/resnet18_cifar10_dropout_0.0/step_1_model_ft.pth
+step_2: /home/qibh/Documents/DNNModularityResearch/SeaM/data/defect_inheritance/seam_ft_cifar10/resnet18_cifar10_dropout_0.0/lr_mask_0.05_alpha_0.5_thres_1.0/step_2_module.pth
+step_3: /home/qibh/Documents/DNNModularityResearch/SeaM/data/defect_inheritance/seam_ft_cifar10/resnet18_cifar10_dropout_0.0/lr_mask_0.05_alpha_0.5_thres_1.0/step_3_module_ft.pth
+
+====== Start Step 1 ======
+
+Step 1: Only finetune the output layer.
+Loading /home/qibh/Documents/DNNModularityResearch/SeaM/data/defect_inheritance/seam_ft_cifar10/resnet18_cifar10_dropout_0.0/step_1_model_ft.pth...
+
+====== Start Step 2 ======
+Step 2: Modularize the fine-tuned model obtained in Step 1
+Loading /home/qibh/Documents/DNNModularityResearch/SeaM/data/defect_inheritance/seam_ft_cifar10/resnet18_cifar10_dropout_0.0/lr_mask_0.05_alpha_0.5_thres_1.0/step_2_module.pth...
+
+====== Start Step 3 ======
+
+Step 3: Finetune according to modularization results.
+
+
+## Start Fine-tuning ##
+
+
+ResNet(
+  (conv1): MaskConv(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): MaskConv(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): MaskConv(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): MaskConv(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): MaskConv(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): MaskConv(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): MaskConv(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): MaskConv(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): MaskConv(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): MaskConv(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): MaskConv(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): MaskConv(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): MaskConv(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): MaskConv(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): MaskConv(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): MaskConv(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): MaskConv(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): MaskConv(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): MaskConv(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): MaskConv(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (fc): Linear(in_features=512, out_features=10, bias=True)
+)
+
+Epoch 0
+--------------------------------------------------------------------------------
+Train Acc: 82.91%
+Val   Acc: 93.89%
+
+Epoch 1
+--------------------------------------------------------------------------------
+Train Acc: 86.56%
+Val   Acc: 93.81%
+
+Epoch 2
+--------------------------------------------------------------------------------
+Train Acc: 87.52%
+Val   Acc: 94.08%
+
+Epoch 3
+--------------------------------------------------------------------------------
+Train Acc: 87.85%
+Val   Acc: 93.58%
+
+Epoch 4
+--------------------------------------------------------------------------------
+Train Acc: 88.42%
+Val   Acc: 94.00%
+
+Epoch 5
+--------------------------------------------------------------------------------
+Train Acc: 88.73%
+Val   Acc: 94.74%
+
+Epoch 6
+--------------------------------------------------------------------------------
+Train Acc: 89.16%
+Val   Acc: 94.45%
+
+Epoch 7
+--------------------------------------------------------------------------------
+Train Acc: 88.99%
+Val   Acc: 94.05%
+
+Epoch 8
+--------------------------------------------------------------------------------
+Train Acc: 89.28%
+Val   Acc: 94.62%
+
+Epoch 9
+--------------------------------------------------------------------------------
+Train Acc: 89.55%
+Val   Acc: 94.20%
+
+Epoch 10
+--------------------------------------------------------------------------------
+Train Acc: 89.79%
+Val   Acc: 93.96%
+
+Epoch 11
+--------------------------------------------------------------------------------
+Train Acc: 89.77%
+Val   Acc: 94.31%
+
+Epoch 12
+--------------------------------------------------------------------------------
+Train Acc: 90.10%
+Val   Acc: 94.60%
+
+Epoch 13
+--------------------------------------------------------------------------------
+Train Acc: 90.22%
+Val   Acc: 94.72%
+
+Epoch 14
+--------------------------------------------------------------------------------
+Train Acc: 90.39%
+Val   Acc: 94.43%
+
+Epoch 15
+--------------------------------------------------------------------------------
+Train Acc: 90.18%
+Val   Acc: 94.55%
+
+Epoch 16
+--------------------------------------------------------------------------------
+Train Acc: 90.52%
+Val   Acc: 94.35%
+
+Epoch 17
+--------------------------------------------------------------------------------
+Train Acc: 90.55%
+Val   Acc: 94.13%
+
+Epoch 18
+--------------------------------------------------------------------------------
+Train Acc: 90.50%
+Val   Acc: 94.74%
+
+Epoch 19
+--------------------------------------------------------------------------------
+Train Acc: 90.78%
+Val   Acc: 94.86%
+
+Epoch 20
+--------------------------------------------------------------------------------
+Train Acc: 90.95%
+Val   Acc: 94.48%
+
+Epoch 21
+--------------------------------------------------------------------------------
+Train Acc: 90.99%
+Val   Acc: 94.68%
+
+Epoch 22
+--------------------------------------------------------------------------------
+Train Acc: 90.98%
+Val   Acc: 94.98%
+
+Epoch 23
+--------------------------------------------------------------------------------
+Train Acc: 91.00%
+Val   Acc: 94.69%
+
+Epoch 24
+--------------------------------------------------------------------------------
+Train Acc: 91.37%
+Val   Acc: 94.76%
+
+Epoch 25
+--------------------------------------------------------------------------------
+Train Acc: 91.15%
+Val   Acc: 94.44%
+
+Epoch 26
+--------------------------------------------------------------------------------
+Train Acc: 91.03%
+Val   Acc: 94.60%
+
+Epoch 27
+--------------------------------------------------------------------------------
+Train Acc: 91.22%
+Val   Acc: 94.81%
+
+Epoch 28
+--------------------------------------------------------------------------------
+Train Acc: 91.20%
+Val   Acc: 94.59%
+
+Epoch 29
+--------------------------------------------------------------------------------
+Train Acc: 91.30%
+Val   Acc: 94.78%
+
+Best Epoch: 22
+Best Acc  : 94.98%
+Step 3 Finished.
+
+
